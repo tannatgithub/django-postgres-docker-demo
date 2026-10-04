@@ -7,16 +7,11 @@ ENV PYTHONUNBUFFERED 1
 # Đặt thư mục làm việc
 WORKDIR /app
 
-# Copy toàn bộ code vào container
-COPY . /app/
-
-# # Chuyển thư mục làm việc vào nơi chứa manage.py
-# WORKDIR /app/myproject
-
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# COPY myproject/ .
+# Copy toàn bộ code vào container
+COPY . /app/
 
-# Chạy server Django
+# Chạy server Django mặc định (docker-compose sẽ ghi đè CMD này)
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
